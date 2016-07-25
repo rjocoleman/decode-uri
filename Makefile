@@ -8,3 +8,6 @@ linux: *.go
 
 clean:
 	rm -f decode-uri
+
+dist: linux
+	tar -cvzf linux-amd64-decode-uri.tar.gz ./decode-uri 
