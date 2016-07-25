@@ -48,18 +48,20 @@ func main() {
 			export(prefix, "SCHEME", u.Scheme)
 		}
 
-		if u.User.Username() != "" {
+		if u.User != nil {
 			export(prefix, "USERNAME", u.User.Username())
-		}
 
-		password, _ := u.User.Password()
-		if password != "" {
-			export(prefix, "PASSWORD", password)
+			password, set := u.User.Password()
+			if set == true {
+				export(prefix, "PASSWORD", password)
+			}
 		}
 
 		host, port, _ := net.SplitHostPort(u.Host)
 		if host != "" {
 			export(prefix, "HOST", host)
+		} else {
+			export(prefix, "HOST", u.Host)
 		}
 		if port != "" {
 			export(prefix, "PORT", port)
